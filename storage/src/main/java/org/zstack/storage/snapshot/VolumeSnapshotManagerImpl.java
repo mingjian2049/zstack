@@ -403,6 +403,9 @@ public class VolumeSnapshotManagerImpl extends AbstractService implements Volume
         if ( msg.getInterval() != 0) {
             job.setInterval(msg.getInterval());
         }
+        if ( msg.getRepeatCount() != 0) {
+            job.setRepeat(msg.getRepeatCount());
+        }
         if(msg.getJobName() != null && !msg.getJobName().isEmpty()) {
             job.setJobName(msg.getJobName());
         }

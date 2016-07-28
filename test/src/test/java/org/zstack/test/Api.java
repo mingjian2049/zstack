@@ -4111,15 +4111,16 @@ public class Api implements CloudBusEventListener {
         APIDeleteLogEvent evt = sender.send(msg, APIDeleteLogEvent.class);
     }
 
-    public void createScheduler(String volUuid, SessionInventory session) throws ApiSenderException {
+    public void createScheduler(String volUuid, SessionInventory session, int interval, int repeatCount) throws ApiSenderException {
         //DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         APICreateVolumeSnapshotSchedulerMsg msg = new APICreateVolumeSnapshotSchedulerMsg();
         msg.setSession(session == null ? adminSession : session);
         msg.setSchedulerName("test");
-        msg.setInterval(10);
+        msg.setInterval(interval);
+        msg.setRepeatCount(repeatCount);
         msg.setType("simple");
-        msg.setStartTimeStamp(date.getTime() + 5000);
+        msg.setStartTimeStamp(date.getTime() + 2000);
         msg.setName("Snapshot-" + volUuid);
         msg.setDescription("Test snapshot");
         msg.setVolumeUuid(volUuid);
@@ -4134,8 +4135,8 @@ public class Api implements CloudBusEventListener {
         APICreateVolumeSnapshotSchedulerMsg msg = new APICreateVolumeSnapshotSchedulerMsg();
         msg.setSession(session == null ? adminSession : session);
         msg.setSchedulerName("testCron");
-        // fire every 10 seconds
-        msg.setCron("0/10 * * * * ?");
+        // fire every 3 seconds
+        msg.setCron("0/3 * * * * ?");
         msg.setType("cron");
         msg.setName("Snapshot-" + volUuid);
         msg.setDescription("Test snapshot");
@@ -4147,11 +4148,12 @@ public class Api implements CloudBusEventListener {
         logger.debug(MessageCommandRecorder.endAndToString());
     }
 
-    public void updateScheduler(String uuid, SessionInventory session) throws ApiSenderException {
+    public void updateSimpleScheduler(String uuid, SessionInventory session) throws ApiSenderException {
         APIUpdateSchedulerMsg msg = new APIUpdateSchedulerMsg();
         msg.setSchedulerType("simple");
         msg.setSchedulerName("update-test");
-        msg.setSchedulerInterval(5);
+        msg.setSchedulerInterval(2);
+        msg.setRepeatCount(2);
         msg.setSession(session == null ? adminSession : session);
         msg.setUuid(uuid);
         msg.setServiceId(ApiMediatorConstant.SERVICE_ID);

@@ -60,8 +60,8 @@ public class TestSchedulerCron {
         VmInstanceInventory vm = deployer.vms.get("TestVm");
         String volUuid = vm.getRootVolumeUuid();
         api.createCronScheduler(volUuid, session);
-        TimeUnit.SECONDS.sleep(25);
+        TimeUnit.SECONDS.sleep(10);
         long counter = dbf.count(VolumeSnapshotVO.class);
-        Assert.assertEquals(2,counter);
+        Assert.assertEquals(3,counter);
     }
 }

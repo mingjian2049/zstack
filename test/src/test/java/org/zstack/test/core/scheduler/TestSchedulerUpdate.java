@@ -58,14 +58,16 @@ public class TestSchedulerUpdate {
         Assert.assertNotNull(scheduler);
         VmInstanceInventory vm = deployer.vms.get("TestVm");
         String volUuid = vm.getRootVolumeUuid();
-        // createScheduler test case will start 5s later
-        api.createScheduler(volUuid, session);
-        TimeUnit.SECONDS.sleep(7);
+        // createScheduler test case will start 2s later
+        int interval = 3;
+        int repeatCount = 2;
+        api.createScheduler(volUuid, session, interval, repeatCount);
+        TimeUnit.SECONDS.sleep(3);
         long record = dbf.count(VolumeSnapshotVO.class);
         Assert.assertEquals(1,record);
         SchedulerVO firstRecord = dbf.listAll(SchedulerVO.class).get(0);
-        api.updateScheduler(firstRecord.getUuid(), session);
-        TimeUnit.SECONDS.sleep(10);
+        api.updateSimpleScheduler(firstRecord.getUuid(), session);
+        TimeUnit.SECONDS.sleep(7);
         long record2 = dbf.count(VolumeSnapshotVO.class);
         Assert.assertEquals(4, record2);
 

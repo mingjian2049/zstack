@@ -15,6 +15,8 @@ public class APICreateVolumeSnapshotSchedulerMsg extends APICreateMessage implem
     @APIParam (required = false)
     private int interval;
     @APIParam (required = false)
+    private int repeatCount;
+    @APIParam (required = false)
     private long startTimeStamp;
     @APIParam (required = false)
     private String cron;
@@ -42,6 +44,14 @@ public class APICreateVolumeSnapshotSchedulerMsg extends APICreateMessage implem
      */
     @APIParam(required = false, maxLength = 2048)
     private String description;
+
+    public int getRepeatCount() {
+        return repeatCount;
+    }
+
+    public void setRepeatCount(int repeatCount) {
+        this.repeatCount = repeatCount;
+    }
 
     public long getStartTimeStamp() {
         return startTimeStamp;

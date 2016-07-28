@@ -59,10 +59,12 @@ public class TestSchedulerCreateVolumeSnapshot {
         Assert.assertNotNull(scheduler);
         VmInstanceInventory vm = deployer.vms.get("TestVm");
         String volUuid = vm.getRootVolumeUuid();
-        api.createScheduler(volUuid, session);
-        TimeUnit.SECONDS.sleep(30);
+        int interval = 3;
+        int repeatCount = 1;
+        api.createScheduler(volUuid, session, interval, repeatCount);
+        TimeUnit.SECONDS.sleep(8);
         long record = dbf.count(VolumeSnapshotVO.class);
-        Assert.assertEquals(3,record);
+        Assert.assertEquals(2,record);
 
     }
 

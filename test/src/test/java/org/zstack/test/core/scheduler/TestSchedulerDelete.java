@@ -59,18 +59,20 @@ public class TestSchedulerDelete {
         Assert.assertNotNull(scheduler);
         VmInstanceInventory vm = deployer.vms.get("TestVm");
         String volUuid = vm.getRootVolumeUuid();
-        api.createScheduler(volUuid, session);
-        TimeUnit.SECONDS.sleep(20);
+        int interval = 3;
+        int repeatCount = 5;
+        api.createScheduler(volUuid, session, interval, repeatCount);
+        TimeUnit.SECONDS.sleep(10);
         long counter = dbf.count(VolumeSnapshotVO.class);
-        Assert.assertEquals(2,counter);
+        Assert.assertEquals(3,counter);
         SchedulerVO firstRecord = dbf.listAll(SchedulerVO.class).get(0);
         api.deleteScheduler(firstRecord.getUuid(), session);
-        TimeUnit.SECONDS.sleep(15);
+        TimeUnit.SECONDS.sleep(4);
         long counter2 = dbf.count(SchedulerVO.class);
         long counter3 = dbf.count(VolumeSnapshotVO.class);
         Assert.assertEquals(0, counter2);
-        TimeUnit.SECONDS.sleep(15);
-        Assert.assertEquals(2, counter3);
+        TimeUnit.SECONDS.sleep(4);
+        Assert.assertEquals(3, counter3);
 
     }
 
