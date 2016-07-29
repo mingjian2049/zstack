@@ -4121,7 +4121,7 @@ public class Api implements CloudBusEventListener {
         msg.setRepeatCount(repeatCount);
         msg.setType("simple");
         msg.setStartTimeStamp(date.getTime() + 2000);
-        msg.setName("Snapshot-" + volUuid);
+        msg.setSnapShotName("Snapshot-" + volUuid);
         msg.setDescription("Test snapshot");
         msg.setVolumeUuid(volUuid);
         msg.setServiceId(ApiMediatorConstant.SERVICE_ID);
@@ -4138,7 +4138,7 @@ public class Api implements CloudBusEventListener {
         // fire every 3 seconds
         msg.setCron("0/3 * * * * ?");
         msg.setType("cron");
-        msg.setName("Snapshot-" + volUuid);
+        msg.setSnapShotName("Snapshot-" + volUuid);
         msg.setDescription("Test snapshot");
         msg.setVolumeUuid(volUuid);
         msg.setServiceId(ApiMediatorConstant.SERVICE_ID);

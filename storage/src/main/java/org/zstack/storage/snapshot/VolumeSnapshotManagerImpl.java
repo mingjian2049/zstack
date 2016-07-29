@@ -406,6 +406,7 @@ public class VolumeSnapshotManagerImpl extends AbstractService implements Volume
         if ( msg.getRepeatCount() != 0) {
             job.setRepeat(msg.getRepeatCount());
         }
+        // jobName, jobGroup, triggerName, triggerGroup reserved for future API
         if(msg.getJobName() != null && !msg.getJobName().isEmpty()) {
             job.setJobName(msg.getJobName());
         }
@@ -431,7 +432,7 @@ public class VolumeSnapshotManagerImpl extends AbstractService implements Volume
             job.setTriggerGroup(msg.getVolumeUuid());
         }
         job.setVolumeUuid(msg.getVolumeUuid());
-        job.setName(msg.getName());
+        job.setSnapShotName(msg.getSnapShotName());
         job.setDescription(msg.getDescription());
         job.setCreateDate(ts);
         schedulerFacade.schedulerRunner(job);

@@ -22,7 +22,7 @@ public class SchedulerVO_ {
     public static volatile SingularAttribute<SchedulerVO, String> triggerGroup;
     public static volatile SingularAttribute<SchedulerVO, String> jobClassName;
     public static volatile SingularAttribute<SchedulerVO, String> jobData;
-    public static volatile SingularAttribute<SchedulerVO, EnumType> status;
+    public static volatile SingularAttribute<SchedulerVO, SchedulerStatus> status;
     public static volatile SingularAttribute<SchedulerVO, Timestamp> createDate;
     public static volatile SingularAttribute<SchedulerVO, Timestamp> startDate;
     public static volatile SingularAttribute<SchedulerVO, Timestamp> stopDate;

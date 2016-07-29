@@ -38,7 +38,7 @@ public class APICreateVolumeSnapshotSchedulerMsg extends APICreateMessage implem
      * @desc snapshot name. Max length of 255 characters
      */
     @APIParam(maxLength = 255)
-    private String name;
+    private String snapShotName;
     /**
      * @desc snapshot description. Max length of 2048 characters
      */
@@ -119,12 +119,12 @@ public class APICreateVolumeSnapshotSchedulerMsg extends APICreateMessage implem
         this.volumeUuid = volumeUuid;
     }
 
-    public String getName() {
-        return name;
+    public String getSnapShotName() {
+        return snapShotName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSnapShotName(String snapShotName) {
+        this.snapShotName = snapShotName;
     }
 
     public String getDescription() {

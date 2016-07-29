@@ -88,7 +88,7 @@ public class SchedulerFacadeImpl extends AbstractService implements SchedulerFac
         bus.publish(evt);
     }
 
-    protected SchedulerVO updateScheduler(APIUpdateSchedulerMsg msg) {
+    private SchedulerVO updateScheduler(APIUpdateSchedulerMsg msg) {
         boolean update = false;
         boolean reSchedule = false;
         self = dbf.findByUuid(msg.getUuid(), SchedulerVO.class);
@@ -287,7 +287,7 @@ public class SchedulerFacadeImpl extends AbstractService implements SchedulerFac
         }
 
         if (saveDB) {
-            vo.setStatus("enabled");
+            vo.setStatus(SchedulerStatus.Enabled.toString());
             dbf.persist(vo);
         }
     }

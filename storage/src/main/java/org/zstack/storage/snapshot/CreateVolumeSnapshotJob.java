@@ -1,8 +1,5 @@
 package org.zstack.storage.snapshot;
 
-import org.quartz.JobDataMap;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -44,7 +41,7 @@ public class CreateVolumeSnapshotJob implements SchedulerJob {
     private String triggerName;
     private Timestamp createDate;
     private String volumeUuid;
-    private String name;
+    private String snapShotName;
     private String description;
 
     @Override
@@ -64,7 +61,7 @@ public class CreateVolumeSnapshotJob implements SchedulerJob {
     public void run() {
 
         CreateVolumeSnapshotMsg cmsg = new CreateVolumeSnapshotMsg();
-        cmsg.setName(getName());
+        cmsg.setName(getSnapShotName());
         cmsg.setDescription(getDescription());
         cmsg.setVolumeUuid(getVolumeUuid());
         cmsg.setAccountUuid(acntMgr.getOwnerAccountUuidOfResource(getVolumeUuid()));
@@ -150,12 +147,12 @@ public class CreateVolumeSnapshotJob implements SchedulerJob {
         this.schedulerName = schedulerName;
     }
 
-    public String getName() {
-        return name;
+    public String getSnapShotName() {
+        return snapShotName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSnapShotName(String snapShotName) {
+        this.snapShotName = snapShotName;
     }
 
     public String getDescription() {
