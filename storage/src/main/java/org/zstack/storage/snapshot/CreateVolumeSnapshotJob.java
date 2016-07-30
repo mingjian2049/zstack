@@ -44,15 +44,6 @@ public class CreateVolumeSnapshotJob implements SchedulerJob {
     private String snapShotName;
     private String description;
 
-    @Override
-    public Timestamp getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Timestamp createDate) {
-        this.createDate = createDate;
-    }
-
     private static final CLogger logger = Utils.getLogger(SchedulerFacadeImpl.class);
     public CreateVolumeSnapshotJob() {
 
@@ -81,6 +72,14 @@ public class CreateVolumeSnapshotJob implements SchedulerJob {
         });
     }
 
+    @Override
+    public Timestamp getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
+    }
     @Override
     public Date getStartDate() {
         return startDate;

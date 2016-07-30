@@ -4172,4 +4172,20 @@ public class Api implements CloudBusEventListener {
         APIDeleteSchedulerEvent evt = sender.send(msg, APIDeleteSchedulerEvent.class);
         logger.debug(MessageCommandRecorder.endAndToString());
     }
+
+    public void stopVmInstanceScheduler(String vmUuid, String type, long startDate, int interval, int repeatCount ) throws ApiSenderException {
+        APIStopVmInstanceSchedulerMsg msg = new APIStopVmInstanceSchedulerMsg();
+        msg.setSession(adminSession);
+        msg.setSchedulerName("test");
+        msg.setInterval(interval);
+        msg.setRepeatCount(repeatCount);
+        msg.setType(type);
+        msg.setStartTimeStamp(startDate);
+        msg.setServiceId(ApiMediatorConstant.SERVICE_ID);
+        msg.setVmUuid(vmUuid);
+        ApiSender sender = new ApiSender();
+        sender.setTimeout(timeout);
+        APIStopVmInstanceSchedulerEvent evt = sender.send(msg, APIStopVmInstanceSchedulerEvent.class);
+        logger.debug(MessageCommandRecorder.endAndToString());
+    }
 }
