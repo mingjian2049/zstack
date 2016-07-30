@@ -80,8 +80,10 @@ public class VmInstanceApiInterceptor implements ApiMessageInterceptor {
             validate((APISetVmStaticIpMsg) msg);
         } else if (msg instanceof APIStartVmInstanceMsg) {
             validate((APIStartVmInstanceMsg) msg);
-        } else if (msg instanceof APIStartVmInstanceMsg) {
+        } else if (msg instanceof APIStopVmInstanceSchedulerMsg) {
             validate((APIStopVmInstanceSchedulerMsg) msg);
+        } else if (msg instanceof APIStartVmInstanceSchedulerMsg) {
+            validate((APIStartVmInstanceSchedulerMsg) msg);
         }
 
         setServiceId(msg);
@@ -96,6 +98,29 @@ public class VmInstanceApiInterceptor implements ApiMessageInterceptor {
     }
 
     private void validate(APIStopVmInstanceSchedulerMsg msg) {
+        if (msg.getType().equals("simple")) {
+            if (msg.getInterval() == 0) {
+                throw new ApiMessageInterceptionException(errf.instantiateErrorCode(SysErrors.INVALID_ARGUMENT_ERROR,
+                        String.format("either interval or startTimeStamp must be set when use simple scheduler")
+                ));
+            }
+            if (msg.getStartTimeStamp() == 0) {
+                throw new ApiMessageInterceptionException(errf.instantiateErrorCode(SysErrors.INVALID_ARGUMENT_ERROR,
+                        String.format("either interval or startTimeStamp must be set when use simple scheduler")
+                ));
+            }
+        }
+        if (msg.getType().equals("cron")) {
+            if (msg.getCron() == null || msg.getCron().isEmpty()) {
+                throw new ApiMessageInterceptionException(errf.instantiateErrorCode(SysErrors.INVALID_ARGUMENT_ERROR,
+                        String.format("cron must be set when use cron scheduler")
+                ));
+            }
+        }
+    }
+
+
+    private void validate(APIStartVmInstanceSchedulerMsg msg) {
         if (msg.getType().equals("simple")) {
             if (msg.getInterval() == 0) {
                 throw new ApiMessageInterceptionException(errf.instantiateErrorCode(SysErrors.INVALID_ARGUMENT_ERROR,

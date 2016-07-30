@@ -38,7 +38,7 @@ public class APIStartVmInstanceSchedulerMsg extends APIMessage implements VmInst
      * @desc vm uuid
      */
     @APIParam(resourceType = VmInstanceVO.class, checkAccount = true, operationTarget = true)
-    private String uuid;
+    private String vmUuid;
 
     @APIParam(resourceType = ClusterVO.class, required = false)
     private String clusterUuid;
@@ -141,17 +141,17 @@ public class APIStartVmInstanceSchedulerMsg extends APIMessage implements VmInst
         this.hostUuid = hostUuid;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getVmUuid() {
+        return vmUuid;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setVmUuid(String vmUuid) {
+        this.vmUuid = vmUuid;
     }
 
     @Override
     public String getVmInstanceUuid() {
-        return getUuid();
+        return getVmUuid();
     }
 
 }
