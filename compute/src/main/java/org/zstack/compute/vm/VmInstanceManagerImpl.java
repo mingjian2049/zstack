@@ -564,6 +564,7 @@ public class VmInstanceManagerImpl extends AbstractService implements VmInstance
         cmsg.setDescription(msg.getDescription());
         cmsg.setResourceUuid(msg.getResourceUuid());
         cmsg.setDefaultL3NetworkUuid(msg.getDefaultL3NetworkUuid());
+        cmsg.setConsolePassword(msg.getConsolePassword());
         return cmsg;
     }
 
