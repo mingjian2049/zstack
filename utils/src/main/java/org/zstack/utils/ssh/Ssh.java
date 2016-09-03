@@ -339,6 +339,9 @@ public class Ssh {
                 return true;
             }
         });
+
+        File knownHosts = new File("/dev/null");
+        ssh.loadKnownHosts(knownHosts);
         ssh.connect(hostname, port);
         if (privateKey != null) {
             privateKeyFile = File.createTempFile("zstack", "tmp");
