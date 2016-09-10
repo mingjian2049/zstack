@@ -367,8 +367,6 @@ public class KVMHost extends HostBase implements Host {
                 return OnlineChangeCpuMemoryResponse.class;
             }
         });
-        reply.setInstanceOfferingInventory(msg.getInstanceOfferingInventory());
-        bus.reply(msg,reply);
     }
     private void handle(final GetVmConsoleAddressFromHostMsg msg) {
         final GetVmConsoleAddressFromHostReply reply = new GetVmConsoleAddressFromHostReply();
