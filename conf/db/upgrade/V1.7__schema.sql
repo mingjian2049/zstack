@@ -119,12 +119,17 @@ ALTER TABLE `zstack`.`LdapAccountRefVO` ADD UNIQUE INDEX(ldapUid,ldapServerUuid)
 
 CREATE TABLE `zstack`.`VCenterVO` (
     `uuid` varchar(32) NOT NULL UNIQUE,
+    `zoneUuid` varchar(32) NOT NULL,
     `name` varchar(255) NOT NULL,
     `description` varchar(2048) DEFAULT NULL,
-    `domain` varchar(255) NOT NULL,
-    `username` varchar(255) NOT NULL,
+    `domainName` varchar(255) NOT NULL,
+    `userName` varchar(255) NOT NULL,
     `password` varchar(1024) NOT NULL,
     `https` int unsigned DEFAULT NULL,
+    `state` varchar(32) NOT NULL,
+    `status` varchar(32) NOT NULL,
+    `lastOpDate` timestamp ON UPDATE CURRENT_TIMESTAMP,
+    `createDate` timestamp,
     PRIMARY KEY  (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
